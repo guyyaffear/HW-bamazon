@@ -76,6 +76,8 @@ function addToInventory() {
 }
 
 function createNew() {
+    setTimeout( ()=>{ 
+
     inquirer.prompt([
         {
             type: 'input',
@@ -117,7 +119,7 @@ function createNew() {
                 }
             }
         );
-    });
+    })}, 1000);
 }
 
 // connection.connect(function (err) {

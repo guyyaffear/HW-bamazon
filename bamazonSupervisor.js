@@ -1,6 +1,5 @@
 var inquirer = require('inquirer');
 var mysql = require('mysql');
-var table = require('console.table');
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -8,6 +7,50 @@ var connection = mysql.createConnection({
     password: '',
     database: 'bamazon'
 });
+
+function displayDeptDetails() {
+    connection.query("SELECT departments.*, SUM(products.product_sales) as product_sales FROM departments inner join products on departments.department_name = products.department_name group by products.department_name", function (err, results) {
+        if (err) throw err;
+        console.table(results);
+        SuperVisor();
+        });
+}
+
+
+function addNewDepartment() {
+    setTimeout( ()=>{ 
+
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'deptName',
+            message: 'Please enter your new department name: ',
+        },
+        {
+            type: 'input',
+            name: 'deptCost',
+            message: 'Please enter your department over head costs: ',
+        }
+    ]).then(function (answer) {
+        connection.query(
+            "INSERT INTO products SET ?",
+            [{
+                department_name: answer.deptName,
+                over_head_costs: answer.deptCost
+            }],
+            function (err, res) {
+                if (err) {
+                    console.log("bad code");
+                    return;
+                }
+                else {
+                    console.log(`\nWe have successfully added the department ${answer.deptName}\n`);
+                }
+            }
+        );
+    })}, 1000);
+}
+
 
 function SuperVisor() {
     inquirer.prompt(
@@ -22,10 +65,10 @@ function SuperVisor() {
         response = answer.query;
         switch (response) {
             case 'View Sales by Department':
-                arryFunc();
+                displayDeptDetails();
                 break;
             case 'Create New Department':
-                showLow();
+                addNewDepartment();
                 break;
             default:
                 console.log("Not a valid choice.")
@@ -33,53 +76,9 @@ function SuperVisor() {
     });
 }
 
-var departmentArray = [];
 
 
 
 
 
-function arryFunc() {
-    connection.query(
-        "SELECT * FROM departments",
-        function (error, response) {
-            if (error) {
-                console.log("There was error.")
-                return;
-            }
-            console.table(response);
-            // if (!error) {
-            //     for (var i = 0; i < response.length; i++) {
-            //         departmentArray.push(response[i].department_name);
-            //     }
-            //     console.log(departmentArray);
-            //     for (var i = 0; i < departmentArray.length; i++){
-            //         connection.query(`SELECT * FROM departments WHERE department_name = '${departmentArray[i]}'`, function (error, response) {
-            //             // console.log('error', error);
-            //             // console.log('response', response);
-            //             if (error) {
-            //                 console.log("Odd syntax error.", error);
-            //                 return;
-            //             } else {
-            //                 console.log(response)
-            //                 for (var i =0; i< response.length; i++){
-            //                     var newTotal = 0
-            //                     var updatedTotal = newTotal + response[i].product_sales
-            //                     console.table(updatedTotal);
-            //                 }
-            //             }
-            //         })
-            //     }
-            // }
-        }
-    )
-}
-
-function showLow() {
-    connection.query("SELECT products.stock_quantity,departments.over_head_costs FROM products LEFT JOIN departments ON  products.department_name = departments.department_name ", function (err, results) {
-        if (err) throw err;
-        console.table(results);
-        SuperVisor();
-        });
-}
 SuperVisor();

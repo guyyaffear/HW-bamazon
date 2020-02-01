@@ -72,7 +72,7 @@ function purchaseOrder(ID, Qneeded) {
                         item_id: ID
                     }], function (err, res) {
                         if (err) throw err;
-                        console.log("Response", res);
+                        // console.log("Response", res);
                     });
             }
             else {
