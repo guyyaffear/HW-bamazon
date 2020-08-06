@@ -1,81 +1,51 @@
-# HW-bamazon
-A mock storefront with departments and products. Customers, managers, and supervisors are able to use this app.
+# Command-line bamazon inventory
 
-Motivation
-A Node app for customers to view items and place orders, for managers to perform inventory control and add new products, and for supervisors to track department profitability and add new departments.
+This is a command-line Node.js and MySQL app for buying and tracking bamazon inventory for an online store. 
 
-Video
-Bamazon in action
+## Set up and installation
 
-Tech/framework used
-Built with
+These must be installed to access the store:
 
-Node.js
-Javascript
-MySQL
-inquirer
-console.table
-Features
-Inquirer provides an easy to use UI with prompts asking the user what they would like to do.
-Customers may purchase products from the available products in the database.
-Managers have the ability to add inventory and new products to the databse.
-Supervisors have the ability to view profit data by department and add new departments.
-Console table organizes product, inventory, and department data in a concise manner within the CLI.
-User input validation is present to ensure that customers cannot purchase more inventory than Bamazon has in stock, managers don't add products with no inventory, and supervisors cannot add departments that already exist.
-Installation
-Install Node js
+- [Node.js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/get-npm)
+- [MySQL](https://www.mysql.com/)
 
-Clone the Bamazon repository to your machine
+You need to make your own copy of the MySQL database to run this app. Use `bamazon-seeds.sql` to create an initial database. Then, in `retail-customer.js` and `retail-manager.js`, enter the connection information and credentials to your database.
 
-Open CLI, navigate to the cloned repository, and run the following to install the npm package dependencies
+## Customer and manager database views
 
-  npm install
-Open MySQL Workbench, SQL Pro, or your preferred database management app. Open the "bamazon.sql" script from the cloned repo, and run it to set up the database and base product/department data.
+This app provides a view into the store database from the perspective of both customers and store managers.
 
-Next, within the cloned repo, you'll need to create a pw.js file with the following code, and add your password to access your root server to that file. This file is a dependency for the app. If you do not require a password to access your root, simply leave the pw property as an empty string.
+_Note: You may need to widen your terminal window to see the entire table properly formatted._
 
-var pwd = {
-	pw: "YOUR PASSWORD HERE"
-}
-	
-module.exports = pwd;
-You're ready to go!
-How to use?
-Customers
+### Enter the store as a customer
 
-Run the following in your CLI while inside your cloned repo directory
+As a customer, you can view information about available products and purchase items in stock.
 
-  node bamazonCustomer.js
-Select from the resulting screen whether you would like to view items or leave.
+In a terminal window, navigate into the folder where you downloaded this app, and type `npm install`. Then, type `node retail-customer.js`.
 
-If you select view items, input and enter the item id that you would like to purchase
+![Screen recording of buying products](images/customer-view.gif)
 
-Input and enter the quantity that you would like to buy
+You will see a table of the current products available for purchase, which represents the data stored in a MySQL database. Following the prompts, type the item number of the product you want to buy and the quantity. 
 
-If you would like to buy another item, repeat
+If there is enough inventory available in the store, you can buy the product and see your total cost. The quantity in the database is updated to reflect your purchase.
 
-If you would like to leave, click exit
+Unfortunately, if the store does not have enough of the item to fill your order, your purchase will be declined. 
 
-Managers
+You can type `Q` to leave the store at any prompt.
 
-Run the following in your CLI while inside your cloned repo directory
+### Update product information as a manager
 
-  node bamazonManager.js
-Select from the resulting screen whether you would like to view products for sale, view low inventory, add to inventory, add new product, or exit.
+As a manager, you can view the current inventory, see which products are low in stock, and add new products to the store database.
 
-If you select add to inventory, follow the prompts for item id to increase inventory on and quantity to increase inventory
+In a terminal window, navigate into the folder where you downloaded this app and type `node retail-manager.js`.
 
-If you select add new product, follow the prompts for item name, department, price, and quantity in stock
+Use the arrow keys to navigate the menu of administrative options.
 
-When you are ready to leave, click exit
+![Screen recording of managing products](images/manager-view.gif)
 
-Supervisors
+## Technology
 
-Run the following in your CLI while inside your cloned repo directory
-
-  node bamazonSupervisor.js
-Select from the resulting screen whether you would like to view product sales by department, create a new department, or exit.
-
-If you select create new department, follow the prompts for department name and overhead costs
-
-When you are ready to leave, click exit
+- JavaScript
+- Node.js
+- npm, including [inquirer](https://www.npmjs.com/package/inquirer), [node-mysql](https://www.npmjs.com/package/node-mysql), [cli-table2](https://www.npmjs.com/package/cli-table2) and [chalk](https://www.npmjs.com/package/chalk) packages
