@@ -10,11 +10,11 @@ These must be installed to access the store:
 - [npm](https://www.npmjs.com/get-npm)
 - [MySQL](https://www.mysql.com/)
 
-You need to make your own copy of the MySQL database to run this app. Use `bamazon-seeds.sql` to create an initial database. Then, in `retail-customer.js` and `retail-manager.js`, enter the connection information and credentials to your database.
+You need to make your own copy of the MySQL database to run this app. Use `bamazon-seeds.sql` to create an initial database. Then, in `bamazonCustomer.js` and `bamazonManager.js`,and `bamazonSupervisor.js`, enter the connection information and credentials to your database.
 
 ## Customer and manager database views
 
-This app provides a view into the store database from the perspective of both customers and store managers.
+This app provides a view into the store database from the perspective of both customers and store managers and Supervisor.
 
 _Note: You may need to widen your terminal window to see the entire table properly formatted._
 
@@ -24,7 +24,7 @@ As a customer, you can view information about available products and purchase it
 
 In a terminal window, navigate into the folder where you downloaded this app, and type `npm install`. Then, type `node retail-customer.js`.
 
-![Screen recording of buying products](images/customer-view.gif)
+![Screen recording of buying products](images/bamazonCustome.gif)
 
 You will see a table of the current products available for purchase, which represents the data stored in a MySQL database. Following the prompts, type the item number of the product you want to buy and the quantity. 
 
