@@ -24,8 +24,7 @@ As a customer, you can view information about available products and purchase it
 
 In a terminal window, navigate into the folder where you downloaded this app, and type `npm install`. Then, type `node bamazonCustomer.js`.
 ![Screen recording of buying products](images\bamazonCustomer.gif)
-![Screen recording of buying products](<iframe src="https://drive.google.com/file/d/1DRX-FJbi94yPLTmfS0s3Lu2htcloYUWT/preview" width="640" height="480"></iframe>
-)
+![Screen recording of buying products](src="https://drive.google.com/file/d/1DRX-FJbi94yPLTmfS0s3Lu2htcloYUWT/preview")
 
 You will see a table of the current products available for purchase, which represents the data stored in a MySQL database. Following the prompts, type the item number of the product you want to buy and the quantity. 
 
