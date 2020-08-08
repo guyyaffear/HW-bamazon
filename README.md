@@ -22,9 +22,9 @@ _Note: You may need to widen your terminal window to see the entire table proper
 
 As a customer, you can view information about available products and purchase items in stock.
 
-In a terminal window, navigate into the folder where you downloaded this app, and type `npm install`. Then, type `node retail-customer.js`.
+In a terminal window, navigate into the folder where you downloaded this app, and type `npm install`. Then, type `node bamazonCustomer.js`.
 
-![Screen recording of buying products](./images/bamazonCustome.gif)
+![Screen recording of buying products](images/bamazonCustome.gif)
 
 You will see a table of the current products available for purchase, which represents the data stored in a MySQL database. Following the prompts, type the item number of the product you want to buy and the quantity. 
 
